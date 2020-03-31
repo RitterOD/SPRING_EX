@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="messageRenderer" class="com.config.xml.TxtMessageRenderer">
+        <constructor-arg name="provider" ref="messageProvider"/>
+    </bean>
+    <bean id="messageProvider" class="com.config.xml.StubMessageProvider">
+    </bean>
+
+
+</beans>
