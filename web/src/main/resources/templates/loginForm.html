@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p th:text="'Hello, ' + ${name} + '!'" />
+<form action="http://localhost:8080/loginForm"  method="post">
+    <input type="text" required name="login" placeholder="login" />
+    <input type="password" required name="password" placeholder="password" />
+    <button>login</button>
+</form>
+<a href="http://localhost:8080/registrationForm">don't have account</a>
+</body>
+</html>
