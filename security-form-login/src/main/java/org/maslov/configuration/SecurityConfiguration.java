@@ -30,10 +30,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.httpBasic(c -> {
-            c.realmName("OTHER");
-            c.authenticationEntryPoint(new CustomEntryPoint());
-        });
+//        http.httpBasic(c -> {
+//            c.realmName("OTHER");
+//            c.authenticationEntryPoint(new CustomEntryPoint());
+//        });
+        http.formLogin();
         http.authorizeRequests().anyRequest().authenticated();
     }
 }

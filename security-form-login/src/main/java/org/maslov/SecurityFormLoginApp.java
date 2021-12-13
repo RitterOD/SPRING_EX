@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SecurityDbApp {
+public class SecurityFormLoginApp {
     public static void main(String[] args) {
-        SpringApplication.run(SecurityDbApp.class);
+        SpringApplication.run(SecurityFormLoginApp.class);
     }
 }
