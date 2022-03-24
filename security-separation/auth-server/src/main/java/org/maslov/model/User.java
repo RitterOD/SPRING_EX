@@ -28,5 +28,5 @@ public class User {
 
     @OneToOne
     @JoinColumn(name = "otp_id", referencedColumnName = "id")
-    private OTP otp;
+    private Otp otp;
 }

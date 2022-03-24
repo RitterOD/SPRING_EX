@@ -1,6 +1,7 @@
 package org.maslov.services;
 
-import org.maslov.model.OTP;
+import org.maslov.model.Otp;
+import org.maslov.model.OtpDTO;
 import org.maslov.model.User;
 import org.maslov.repository.OTPrepository;
 import org.maslov.repository.UserRepository;
@@ -54,26 +55,26 @@ public class UserService {
 
     private void renewOtp(User user) {
         String code = OTPgenerator.generateCode();
-        Optional<OTP> userOtp = otPrepository.findByUser(user);
+        Optional<Otp> userOtp = otPrepository.findByUser(user);
         if (userOtp.isPresent()) {
-            OTP otp = userOtp.get();
+            Otp otp = userOtp.get();
             otp.setCode(code);
             otPrepository.save(otp);
         } else {
-            OTP otp = new OTP();
+            Otp otp = new Otp();
             otp.setCode(code);
             otp.setUser(user);
+            user.setOtp(otp);
             otPrepository.save(otp);
         }
     }
 
-    public boolean check(OTP otpToValidate) {
-        Optional<OTP> userOtp =
-                otPrepository.findByUser(otpToValidate.getUser());
+    public boolean check(OtpDTO otpDTO) {
+        Optional<User> userOtp = userRepository.findByUsername(otpDTO.getUsername());
 
         if (userOtp.isPresent()) {
-            OTP otp = userOtp.get();
-            if (otpToValidate.getCode().equals(otp.getCode())) {
+            Otp otp = userOtp.get().getOtp();
+            if (otpDTO.getCode().equals(otp.getCode())) {
                 return true;
             }
         }

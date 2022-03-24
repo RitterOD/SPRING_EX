@@ -1,6 +1,7 @@
 package org.maslov.controller;
 
-import org.maslov.model.OTP;
+import org.maslov.model.Otp;
+import org.maslov.model.OtpDTO;
 import org.maslov.model.User;
 import org.maslov.model.UserDTO;
 import org.maslov.services.UserService;
@@ -44,8 +45,8 @@ public class AuthController {
 
 
     @PostMapping("/otp/check")
-    public void check(@RequestBody OTP otp, HttpServletResponse response) {
-        if (userService.check(otp)) {
+    public void check(@RequestBody OtpDTO dto, HttpServletResponse response) {
+        if (userService.check(dto)) {
             response.setStatus(HttpServletResponse.SC_OK);
         } else {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
