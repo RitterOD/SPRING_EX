@@ -59,6 +59,7 @@ public class UserService {
         if (userOtp.isPresent()) {
             Otp otp = userOtp.get();
             otp.setCode(code);
+            user.setOtp(otp);
             otPrepository.save(otp);
         } else {
             Otp otp = new Otp();
