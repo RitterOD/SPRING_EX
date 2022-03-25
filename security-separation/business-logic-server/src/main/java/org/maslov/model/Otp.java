@@ -7,18 +7,18 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity
+//@Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 public class Otp {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String code;
-
-    @OneToOne(mappedBy = "otp")
-    private User user;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
+//
+//    private String code;
+//
+//    @OneToOne(mappedBy = "otp")
+//    private User user;
 }

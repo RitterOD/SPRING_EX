@@ -1,6 +1,8 @@
 package org.maslov.configuration;
 
 
+import org.maslov.services.security.InitialAuthenticationFilter;
+import org.maslov.services.security.JwtAuthenticationFilter;
 import org.maslov.services.security.OtpAuthenticationProvider;
 import org.maslov.services.security.UsernamePasswordAuthenticationProvider;
 import org.springframework.context.annotation.Bean;
@@ -16,24 +18,27 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final OtpAuthenticationProvider otpAuthenticationProvider;
-
     private final UsernamePasswordAuthenticationProvider usernamePasswordAuthenticationProvider;
+    private final InitialAuthenticationFilter initialAuthenticationFilter;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    public SecurityConfiguration(OtpAuthenticationProvider otpAuthenticationProvider, UsernamePasswordAuthenticationProvider usernamePasswordAuthenticationProvider) {
+    public SecurityConfiguration(OtpAuthenticationProvider otpAuthenticationProvider, UsernamePasswordAuthenticationProvider usernamePasswordAuthenticationProvider, InitialAuthenticationFilter initialAuthenticationFilter, JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.otpAuthenticationProvider = otpAuthenticationProvider;
         this.usernamePasswordAuthenticationProvider = usernamePasswordAuthenticationProvider;
+        this.initialAuthenticationFilter = initialAuthenticationFilter;
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
 
-//        http.addFilterAt(
-//                        initialAuthenticationFilter,
-//                        BasicAuthenticationFilter.class)
-//                .addFilterAfter(
-//                        jwtAuthenticationFilter,
-//                        BasicAuthenticationFilter.class
-//                );
+        http.addFilterAt(
+                        initialAuthenticationFilter,
+                        BasicAuthenticationFilter.class)
+                .addFilterAfter(
+                        jwtAuthenticationFilter,
+                        BasicAuthenticationFilter.class
+                );
 
         http.authorizeRequests()
                 .anyRequest().authenticated();

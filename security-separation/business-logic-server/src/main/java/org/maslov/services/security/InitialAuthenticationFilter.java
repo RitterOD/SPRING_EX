@@ -2,6 +2,7 @@ package org.maslov.services.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
@@ -20,14 +21,13 @@ import java.util.Map;
 @Service
 public class InitialAuthenticationFilter extends OncePerRequestFilter {
 
-    private final AuthenticationManager manager;
+    @Autowired
+    private AuthenticationManager manager;
 
     @Value("${jwt.signing.key}")
     private String signingKey;
 
-    public InitialAuthenticationFilter(AuthenticationManager manager) {
-        this.manager = manager;
-    }
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

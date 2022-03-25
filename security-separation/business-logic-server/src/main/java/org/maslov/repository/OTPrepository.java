@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface OTPrepository extends JpaRepository<Otp, Long> {
+public interface OTPrepository /*extends JpaRepository<Otp, Long>*/ {
 
-    Optional<Otp> findByUser(User user);
+   /* Optional<Otp> findByUser(User user);*/
 }
