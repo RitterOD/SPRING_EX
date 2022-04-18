@@ -46,6 +46,13 @@ public class AuthServerConfig
                 .withClient("client")
                 .secret("secret")
                 .authorizedGrantTypes("password", "refresh_token")
-                .scopes("read");
+                .scopes("read")
+                .and()
+                .withClient("client2")
+                .secret("secret2")
+                .authorizedGrantTypes(
+                "authorization_code")
+                .scopes("read")
+                .redirectUris("http://localhost:9090/home");
     }
 }
