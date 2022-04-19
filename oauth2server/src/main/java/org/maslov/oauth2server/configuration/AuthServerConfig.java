@@ -54,7 +54,10 @@ public class AuthServerConfig
                 .authorizedGrantTypes(
                 "authorization_code")
                 .scopes("read")
-                .redirectUris("http://localhost:9090/home");
+                .redirectUris("http://localhost:9090/home")
+                .and()
+                .withClient("resourceserver")
+                .secret("resourceserversecret");
     }
 
     public void configure(
