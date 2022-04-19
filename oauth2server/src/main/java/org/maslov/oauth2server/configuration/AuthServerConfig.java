@@ -7,6 +7,7 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.client.BaseClientDetails;
 import org.springframework.security.oauth2.provider.client.InMemoryClientDetailsService;
 
@@ -54,5 +55,10 @@ public class AuthServerConfig
                 "authorization_code")
                 .scopes("read")
                 .redirectUris("http://localhost:9090/home");
+    }
+
+    public void configure(
+            AuthorizationServerSecurityConfigurer security) {
+        security.checkTokenAccess("isAuthenticated()");
     }
 }
