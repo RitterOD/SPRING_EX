@@ -39,8 +39,9 @@ public class SimpleKafkaConsumer {
 
         TopicPartition tp = new TopicPartition(topicName, 0);
         List<TopicPartition> tps = Arrays.asList(tp);
-        consumer.assign(tps);
-        consumer.seekToBeginning(tps);
+//        consumer.assign(tps);
+//        consumer.seekToBeginning(tps);
+        consumer.subscribe(List.of(topicName));
 
         int i = 0;
         while (i++ < 100) {
