@@ -15,4 +15,20 @@ class CalcParserFrontTest {
         assertEquals(2, rv);
     }
 
+    @Test
+    void simpleExpressionTwoArg() {
+        String query = "1 + 2";
+        CalcParserFront parser = new CalcParserFront();
+        int rv = parser.parseExpression(query);
+        assertEquals(3, rv);
+    }
+
+    @Test
+    void simpleExpressionTwoLongArg() {
+        String query = "1000 + 2000";
+        CalcParserFront parser = new CalcParserFront();
+        int rv = parser.parseExpression(query);
+        assertEquals(3000, rv);
+    }
+
 }
