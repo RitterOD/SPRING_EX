@@ -10,7 +10,7 @@ simpleSelect
    : SELECT (allColumns | specificColumns) FROM table EOQ;
 
 specificColumns
-   : column (',' column)
+   : column (',' column)*
    ;
 
 allColumns
