@@ -6,6 +6,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 public class SQLQueryParser {
+    /*
     public SQLQuery parseQuery(String raw) {
         CharStream charStream = CharStreams.fromString(raw);
         sqlLexer lexer = new sqlLexer(charStream);
@@ -20,4 +21,6 @@ public class SQLQueryParser {
 
         return listener.getQuery();
     }
+
+     */
 }

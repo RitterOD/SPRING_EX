@@ -1,31 +1,35 @@
 grammar Calc;
 
+MUL: '*';
+DIV: '/';
+ADD: '+';
+SUB: '-';
 
 
+/* The start rule; begin parsing here */
+prog: stat+ ;
 
-/* */
-list
-    : DIGIT '+' list | DIGIT '-' list | DIGIT;
+stat: expr NEWLINE                  #printExpr
+    | ID '=' expr NEWLINE           #assign
+    | NEWLINE                       #blank
+    ;
 
+expr: expr op=('*'|'/') expr         #MulDiv
+    | expr op=('+'|'-') expr         #AddSub
+    | INT                           #int
+    | ID                            #id
+    | '(' expr ')'                  #parents
+    ;
 
-DIGIT
+INT
     : '0' | [1-9][0-9]*;
 
-
-
-ASTERISK: '*';
-SELECT: 'SELECT';
-FROM: 'FROM';
-EOQ: ';';
-
-VALID_NAME
+ID
    : [a-zA-Z] [a-zA-Z_0-9]*
    ;
 
-SPACE:          [ \t\r\n]+    -> channel(HIDDEN);
+NEWLINE: '\r'? '\n';
+WS: [ \t] -> skip;
 COMMENT_INPUT:  '/*' .*? '*/' -> channel(HIDDEN);
-LINE_COMMENT:   ('-- ' | '#')
-                ~[\r\n]*
-                ('\r'? '\n' | EOF)
-                              -> channel(HIDDEN);
+
 

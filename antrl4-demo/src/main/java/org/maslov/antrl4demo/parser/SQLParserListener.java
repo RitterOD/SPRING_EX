@@ -3,7 +3,8 @@ package org.maslov.antrl4demo.parser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SQLParserListener extends sqlBaseListener{
+public class SQLParserListener /*extends sqlBaseListener*/{
+    /*
     private final List<String> columns = new ArrayList<>();
 
     private String fromTable;
@@ -33,5 +34,5 @@ public class SQLParserListener extends sqlBaseListener{
     @Override
     public void exitTable(sqlParser.TableContext ctx) {
         fromTable = ctx.VALID_NAME().getText();
-    }
+    }*/
 }

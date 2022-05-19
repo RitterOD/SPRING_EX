@@ -70,6 +70,12 @@
 						<goals>
 							<goal>antlr4</goal>
 						</goals>
+                        <configuration>
+                            <listener>false</listener>
+                            <arguments>
+                                <argument>-visitor</argument>
+                            </arguments>
+                        </configuration>
 <!--                        <configuration>-->
 <!--                            <outputDirectory>src/main/java/org/maslov</outputDirectory>-->
 <!--                            <arguments>-->
@@ -120,6 +126,20 @@
 <!--                    </execution>-->
 <!--                </executions>-->
 <!--            </plugin>-->
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>org/maslov/antrl4demo/parser/*</exclude>
+                    </excludes>
+                    <testExcludes>
+                        <testExclude>org/maslov/antrl4demo/parser/*</testExclude>
+                    </testExcludes>
+                </configuration>
+            </plugin>
+
 			<plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
