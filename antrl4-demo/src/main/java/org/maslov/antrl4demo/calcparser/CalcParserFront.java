@@ -21,4 +21,14 @@ public class CalcParserFront {
         EvalVisitor evalVisitor = new EvalVisitor();
         return  evalVisitor.visit(tree);
     }
+
+    public void printExpressionParseTree(String rawExpression) {
+
+        CharStream charStream = CharStreams.fromString(rawExpression);
+        CalcLexer lexer = new CalcLexer(charStream);
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        CalcParser parser = new CalcParser(tokens);
+        ParseTree tree = parser.prog();
+        System.out.println(tree.toStringTree(parser));
+    }
 }

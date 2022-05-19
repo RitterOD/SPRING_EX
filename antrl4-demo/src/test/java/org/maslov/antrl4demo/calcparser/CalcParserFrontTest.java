@@ -35,6 +35,7 @@ class CalcParserFrontTest {
     void complexExpression() {
         String query = "1000 + (2000 * 2) + (5 - 4)";
         CalcParserFront parser = new CalcParserFront();
+        parser.printExpressionParseTree(query);
         int rv = parser.parseExpression(query);
         assertEquals(5001, rv);
     }
