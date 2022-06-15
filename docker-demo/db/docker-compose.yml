@@ -1,0 +1,17 @@
+version: '3.1'
+
+volumes:
+  pg_demo:
+
+services:
+  pg_db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=docker-demo
+      - POSTGRES_USER=docker-demo
+      - POSTGRES_DB=docker-demo
+    volumes:
+      - pg_demo:/var/lib/postgresql/data
+    ports:
+      - "10001:5432"
