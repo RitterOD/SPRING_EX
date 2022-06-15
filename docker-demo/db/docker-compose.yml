@@ -16,7 +16,8 @@ services:
     ports:
       - "10001:5432"
   app:
-    image:  1cf1a55531dc
+#    image:  1cf1a55531dc
+    build: ..
     depends_on:
       - pg_db
     environment:
