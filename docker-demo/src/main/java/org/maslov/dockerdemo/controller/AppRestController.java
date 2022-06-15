@@ -4,10 +4,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class DockerDemoAppController {
-    @GetMapping("/")
-    public String getMainPage() {
-        return "Hello from Docker Demo!";
-    }
+public class AppRestController {
 
+    @GetMapping("/trolo")
+    public String getTrollo() {
+        return "APP REST CONTROLLER";
+    }
 }

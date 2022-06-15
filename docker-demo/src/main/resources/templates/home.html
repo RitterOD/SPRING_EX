@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Todo Application</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>id</th><th>text</th>
+        </tr>
+        <tr th:each="item :${items}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.text}"></td>
+        </tr>
+    </table>
+    <form th:action="@{/add}" th:object="${dto}" method="post">
+        <label for="add_item">text of item</label>
+        <input id="add_item" type="text" th:field="*{text}">
+        <button type="submit" class="btn btn-outline-primary btn-block"
+                >add
+        </button>
+    </form>
+
+</body>
+</html>
