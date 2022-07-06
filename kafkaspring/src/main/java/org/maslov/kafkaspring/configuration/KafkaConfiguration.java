@@ -2,10 +2,10 @@ package org.maslov.kafkaspring.configuration;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.common.serialization.LongSerializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.maslov.kafkaspring.model.Message;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -21,13 +21,25 @@ import java.util.Map;
 @EnableKafka
 public class KafkaConfiguration {
 
+
+    private final String kafkaServerURL;
+
+    private final String groupId;
+
+
+
+    public KafkaConfiguration(@Value("${kafkaspring.server}") String kafkaServerURL,
+                              @Value("${kafkaspring.consumer_group_id}") String groupId) {
+        this.kafkaServerURL = kafkaServerURL;
+        this.groupId = groupId;
+    }
+
     @Bean
     public ProducerFactory<String, Message> producerFactory() {
-        String server = "localhost:9092";
-        String topicName = "test.topic";
+
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                server);
+                kafkaServerURL);
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
                 StringSerializer.class);
         config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
@@ -42,12 +54,10 @@ public class KafkaConfiguration {
 
     @Bean
     public ConsumerFactory<String, Message> consumerFactory() {
-        String server = "localhost:9092";
-        String topicName = "test.topic";
         Map<String, Object> config = new HashMap<>();
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                server);
-        config.put(ConsumerConfig.GROUP_ID_CONFIG, "GROUP-0");
+                kafkaServerURL);
+        config.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
                 StringDeserializer.class);
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
