@@ -27,12 +27,16 @@ public class KafkaConsumerService {
 
     @KafkaListener(topics={AppConstant.TOPIC_NAME})
     public void listen(Message message,
-                       @Header(CUSTOM_TIMESTAMP_HEADER) String ts, @Header(KafkaHeaders.OFFSET) String offsetHeader) {
+                       @Header(CUSTOM_TIMESTAMP_HEADER) String ts, @Header(KafkaHeaders.OFFSET) String offsetHeader,
+//                       @Header(KafkaHeaders.TIMESTAMP) String kafka_timestamp,
+                       @Header(KafkaHeaders.RECEIVED_TIMESTAMP) String kafka_received_timestamp) {
         try {
             String tmp = objectMapper.writeValueAsString(message);
             log.info("offset header:" + offsetHeader);
             log.info("Receive message: " + tmp);
             log.info(CUSTOM_TIMESTAMP_HEADER + ": " + ts);
+//            log.info("kafka_timestamp" + ": " + kafka_timestamp);
+            log.info("kafka_received_timestamp" + ": " + kafka_received_timestamp);
         } catch (JsonProcessingException e) {
             log.info(e.getMessage());
         }
