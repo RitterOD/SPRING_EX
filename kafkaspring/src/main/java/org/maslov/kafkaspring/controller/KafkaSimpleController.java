@@ -4,38 +4,30 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.maslov.kafkaspring.model.Message;
+import org.maslov.kafkaspring.service.KafkaProducerService;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import static org.maslov.kafkaspring.service.KafkaProducerService.CUSTOM_TIMESTAMP_HEADER;
 
 @RestController
 @Slf4j
 public class KafkaSimpleController {
 
-    private final KafkaTemplate kafkaTemplate;
+    private final KafkaProducerService kafkaProducerService;
 
-    private final ObjectMapper objectMapper;
-
-    public KafkaSimpleController(KafkaTemplate kafkaTemplate, ObjectMapper objectMapper) {
-        this.kafkaTemplate = kafkaTemplate;
-        this.objectMapper = objectMapper;
+    public KafkaSimpleController(KafkaProducerService kafkaProducerService) {
+        this.kafkaProducerService = kafkaProducerService;
     }
 
     @PostMapping("/api/message")
     public void post(@RequestBody Message message) {
-        kafkaTemplate.send("springTopic", message);
+        kafkaProducerService.sendMessage(message);
     }
 
-    @KafkaListener(topics={"springTopic"})
-    public void listen(Message message) {
-        try {
-            String tmp = objectMapper.writeValueAsString(message);
-            log.info("Receive message: " + tmp);
-        } catch (JsonProcessingException e) {
-            log.info(e.getMessage());
-        }
 
-    }
 }
