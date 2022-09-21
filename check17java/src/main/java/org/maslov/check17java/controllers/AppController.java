@@ -5,6 +5,7 @@ import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.maslov.check17java.model.Point;
 import org.maslov.check17java.service.PointService;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,8 +16,11 @@ public class AppController {
 
   private final PointService pointService;
 
-  public AppController(PointService pointService) {
+  private final Environment environment;
+
+  public AppController(PointService pointService, Environment environment) {
     this.pointService = pointService;
+    this.environment = environment;
   }
 
   @GetMapping("/")
