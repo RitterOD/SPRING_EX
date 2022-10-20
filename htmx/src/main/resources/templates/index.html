@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{panel/layouts/mainCardLayout}">
+<head>
+    <meta charset="UTF-8">
+    <title>HTMX check</title>
+    <script src="https://unpkg.com/htmx.org@1.8.2"></script>
+</head>
+<body>
+<h1>HTMX search demonstration</h1>
+<table>
+    <tr>
+    <th>id </th>
+    <th>message</th>
+    </tr>
+    <th:block th:each="msg : ${messagesView}">
+        <tr>
+        <td th:text="${msg.getId()}"> <td>
+        <td th:text="${msg.getMessage()}"> <td>
+        </tr>
+    </th:block>
+
+</table>
+<button hx-post="/clicked" hx-swap="outerHTML">
+    Click Me
+</button>
+</body>
+</html>
