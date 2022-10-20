@@ -23,8 +23,10 @@
     </th:block>
 
 </table>
-<button hx-post="/clicked" hx-swap="outerHTML">
+<button hx-post="/clicked" hx-target="#random-number">
     Click Me
 </button>
+
+<div id="random-number"></div>
 </body>
 </html>

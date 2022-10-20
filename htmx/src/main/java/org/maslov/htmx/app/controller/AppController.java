@@ -17,7 +17,6 @@ public class AppController {
 
     private final MessageMapper messageMapper;
 
-    private boolean flg = true;
 
     public AppController(MessageService messageService, MessageMapper messageMapper) {
         this.messageService = messageService;

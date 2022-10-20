@@ -19,4 +19,8 @@ public class MessageService {
     public List<Message> findAll() {
         return messageRepository.findAll();
     }
+
+    public List<Message> findByMessageContaining(String pattern) {
+        return messageRepository.findByMessageContaining(pattern);
+    }
 }
