@@ -10,6 +10,10 @@
 </head>
 <body>
 <h1>HTMX search demonstration</h1>
+<button hx-post="/clicked" hx-target="#random-number">
+    Click Me
+</button>
+<div id="random-number"></div>
 <table>
     <tr>
     <th>id </th>
@@ -23,10 +27,15 @@
     </th:block>
 
 </table>
-<button hx-post="/clicked" hx-target="#random-number">
-    Click Me
-</button>
+<h1>Search demonstration</h1>
+<input class="form-control" type="search"
+       name="search_pattern" placeholder="Begin Typing To Search Users..."
+       hx-get="/search"
+       hx-trigger="keyup changed delay:500ms, search"
+       hx-target="#search-results">
 
-<div id="random-number"></div>
+ <div id="search-results"></div>
+
+
 </body>
 </html>
