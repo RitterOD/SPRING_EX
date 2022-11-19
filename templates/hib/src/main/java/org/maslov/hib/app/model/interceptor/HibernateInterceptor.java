@@ -14,6 +14,8 @@ import java.io.Serializable;
 @Component
 public class HibernateInterceptor implements Interceptor, Serializable {
 
+
+    // FIXME Return value
     @Override
     public boolean onLoad(Object entity, Object id, Object[] state, String[] propertyNames, Type[] types)
             throws CallbackException {
