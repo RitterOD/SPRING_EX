@@ -1,10 +1,7 @@
 package org.maslov.hib.blog.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -14,8 +11,9 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder(toBuilder = true)
 @Entity
-@Table(name = "posts")
+@Table(name = "authors")
 @EntityListeners(AuditingEntityListener.class)
 public class Author {
     @Id
@@ -23,7 +21,7 @@ public class Author {
     private Long id;
 
 
-    @Column(name = "nick_name")
+    @Column(name = "nick_name", unique = true)
     private String nickName;
 
     @Column(name = "created_at")
@@ -33,7 +31,6 @@ public class Author {
     @Column(name = "updated_at")
     private Long updatedAt;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name="cart_id", nullable=false)
-    private List<Post> post;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "author")
+    private List<Post> posts;
 }
