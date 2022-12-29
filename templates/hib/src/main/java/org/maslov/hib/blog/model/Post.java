@@ -36,4 +36,8 @@ public class Post {
 
     @Column(name = "updated_at")
     private Long updatedAt;
+
+    @Column(name = "status")
+    @Enumerated(value = EnumType.STRING)
+    private PostStatus status;
 }
