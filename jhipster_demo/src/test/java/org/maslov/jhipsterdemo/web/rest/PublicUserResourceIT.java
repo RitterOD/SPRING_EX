@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.maslov.jhipsterdemo.IntegrationTest;
 import org.maslov.jhipsterdemo.domain.User;
 import org.maslov.jhipsterdemo.repository.UserRepository;
-import org.maslov.jhipsterdemo.repository.search.UserSearchRepository;
 import org.maslov.jhipsterdemo.security.AuthoritiesConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -33,14 +32,6 @@ class PublicUserResourceIT {
 
     @Autowired
     private UserRepository userRepository;
-
-    /**
-     * This repository is mocked in the org.maslov.jhipsterdemo.repository.search test package.
-     *
-     * @see org.maslov.jhipsterdemo.repository.search.UserSearchRepositoryMockConfiguration
-     */
-    @Autowired
-    private UserSearchRepository mockUserSearchRepository;
 
     @Autowired
     private EntityManager em;

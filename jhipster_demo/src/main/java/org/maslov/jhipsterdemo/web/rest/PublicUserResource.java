@@ -1,12 +1,7 @@
 package org.maslov.jhipsterdemo.web.rest;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
-
 import java.util.*;
 import java.util.Collections;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-import org.maslov.jhipsterdemo.repository.search.UserSearchRepository;
 import org.maslov.jhipsterdemo.service.UserService;
 import org.maslov.jhipsterdemo.service.dto.UserDTO;
 import org.slf4j.Logger;
@@ -32,11 +27,9 @@ public class PublicUserResource {
     private final Logger log = LoggerFactory.getLogger(PublicUserResource.class);
 
     private final UserService userService;
-    private final UserSearchRepository userSearchRepository;
 
-    public PublicUserResource(UserSearchRepository userSearchRepository, UserService userService) {
+    public PublicUserResource(UserService userService) {
         this.userService = userService;
-        this.userSearchRepository = userSearchRepository;
     }
 
     /**
@@ -68,16 +61,5 @@ public class PublicUserResource {
     @GetMapping("/authorities")
     public List<String> getAuthorities() {
         return userService.getAuthorities();
-    }
-
-    /**
-     * {@code SEARCH /_search/users/:query} : search for the User corresponding to the query.
-     *
-     * @param query the query to search.
-     * @return the result of the search.
-     */
-    @GetMapping("/_search/users/{query}")
-    public List<UserDTO> search(@PathVariable String query) {
-        return StreamSupport.stream(userSearchRepository.search(query).spliterator(), false).map(UserDTO::new).collect(Collectors.toList());
     }
 }
