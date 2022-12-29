@@ -15,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class DiagramEntry {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(columnDefinition = "TEXT")
