@@ -23,15 +23,17 @@ public class SecurityConfiguration {
     httpSecurity
             .csrf().disable()
             .httpBasic().disable()
+            .formLogin().disable()
+            .addFilterAfter(new JwtTokenAuthenticationFilter(), ExceptionTranslationFilter.class)
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.GET, RestURL.API_V1_HOME)
                     .permitAll())
             .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST, RestURL.API_V1_AUTH)
                     .permitAll())
-            .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST, RestURL.API_V1_DIAG)
-                    .hasAnyRole("USER", "ADMIN"))
-            .addFilterAfter(new JwtTokenAuthenticationFilter(), ExceptionTranslationFilter.class);
+            .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.GET, RestURL.API_V1_DIAG)
+                    .hasAnyRole("USER", "ADMIN"));
+
 
     return httpSecurity.build();
   }
