@@ -18,6 +18,6 @@ public class PropertiesSecretProvider implements SecretProvider{
 
     @Override
     public String getSecret() {
-        return null;
+        return secret;
     }
 }

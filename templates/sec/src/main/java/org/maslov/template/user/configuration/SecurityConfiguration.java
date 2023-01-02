@@ -1,9 +1,13 @@
 package org.maslov.template.user.configuration;
 
 import org.maslov.template.user.component.JwtTokenAuthenticationFilter;
+import org.maslov.template.user.service.JWTUtils;
+import org.maslov.template.user.service.UserDetailsServiceSpringDataImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,9 +17,28 @@ import org.springframework.security.web.access.ExceptionTranslationFilter;
 
 @Configuration
 public class SecurityConfiguration {
+
+  private final UserDetailsServiceSpringDataImpl userDetailsServiceSpringData;
+  private final JWTUtils jwtUtils;
+
+
+  public SecurityConfiguration(UserDetailsServiceSpringDataImpl userDetailsServiceSpringData, JWTUtils jwtUtils) {
+    this.userDetailsServiceSpringData = userDetailsServiceSpringData;
+    this.jwtUtils = jwtUtils;
+  }
+
   @Bean
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
+  }
+
+
+
+
+  @Bean
+  public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+          throws Exception {
+    return authenticationConfiguration.getAuthenticationManager();
   }
 
   @Bean
@@ -24,7 +47,7 @@ public class SecurityConfiguration {
             .csrf().disable()
             .httpBasic().disable()
             .formLogin().disable()
-            .addFilterAfter(new JwtTokenAuthenticationFilter(), ExceptionTranslationFilter.class)
+            .addFilterAfter(new JwtTokenAuthenticationFilter(userDetailsServiceSpringData, jwtUtils), ExceptionTranslationFilter.class)
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.GET, RestURL.API_V1_HOME)
