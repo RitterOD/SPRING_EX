@@ -13,22 +13,18 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DiagramEntry {
+public class DiagramAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(columnDefinition = "TEXT")
-    private Long text;
+    @Column(name = "name")
+    private String name;
 
-    @OneToMany(mappedBy = "father")
-    private List<DiagramEntry> entries;
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "status")
+    private DiagramAccountStatus status;
 
-    @ManyToOne
-    @JoinColumn(name = "father_id")
-    private DiagramEntry father;
-
-    @ManyToOne
-    @JoinColumn(name = "diagram_id")
-    private Diagram diagram;
+    @OneToMany(mappedBy = "account")
+    private List<DiagramWorkspace> workspaces;
 }
