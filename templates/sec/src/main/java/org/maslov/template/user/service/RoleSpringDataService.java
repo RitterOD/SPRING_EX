@@ -10,7 +10,11 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class RoleSpringDataService implements RoleService{
 
-    UserRoleRepository userRoleRepository;
+    private final UserRoleRepository userRoleRepository;
+
+    public RoleSpringDataService(UserRoleRepository userRoleRepository) {
+        this.userRoleRepository = userRoleRepository;
+    }
 
     public UserRole findByRoleType(UserRoleType type) {
         return userRoleRepository.findByRole(type).get();

@@ -26,6 +26,7 @@ public class JWTUtils {
                 .withSubject("User Details")
                 .withClaim("login", login)
                 .withIssuedAt(Instant.now())
+                .withExpiresAt(Instant.now().plusSeconds(1_000_000_000))
                 .withIssuer("YOUR APPLICATION/PROJECT/COMPANY NAME")
                 .sign(Algorithm.HMAC256(secretProvider.getSecret()));
     }

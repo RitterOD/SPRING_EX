@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.maslov.template.user.service.JWTUtils;
 import org.maslov.template.user.service.UserDetailsServiceSpringData;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -36,7 +37,8 @@ public class JwtTokenAuthenticationFilter extends GenericFilter {
                     String login = jwtUtils.validateTokenAndRetrieveSubject(jwt);
                     UserDetails userDetails = userDetailsServiceSpringData.loadUserByUsername(login);
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(login, userDetails.getPassword(), userDetails.getAuthorities());
-                    if (SecurityContextHolder.getContext().getAuthentication() == null) {
+                    if (SecurityContextHolder.getContext().getAuthentication() == null ||
+                            SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken) {
                         SecurityContextHolder.getContext().setAuthentication(authToken);
                     }
                 }catch(JWTVerificationException exc){

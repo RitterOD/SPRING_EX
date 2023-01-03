@@ -55,9 +55,9 @@ public class SecurityConfiguration {
             .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST, RestURL.API_V1_AUTH)
                     .permitAll())
             .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.GET, RestURL.API_V1_DIAG)
-                    .hasAnyRole("USER", "ADMIN"));
-
-
+                    .hasAnyRole("USER", "ADMIN"))
+            .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST, RestURL.API_V1_AUTH_CREATE)
+                  .hasAnyRole("ADMIN"));
     return httpSecurity.build();
   }
 

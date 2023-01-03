@@ -1,5 +1,6 @@
 package org.maslov.template.user.service;
 
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.maslov.template.diagramapp.DiagramAppService;
 import org.maslov.template.user.model.User;
@@ -9,6 +10,7 @@ import org.maslov.template.user.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -36,14 +38,19 @@ public class UserServiceSpringData implements UserService{
     }
 
     @Override
+    @Transactional
     public User createUser(String userLogin, String password, UserRoleType role) {
         UserRole userRole = roleService.findByRoleType(role);
+        Set<UserRole> roleSet = new HashSet<>();
+        roleSet.add(userRole);
         var user = User.builder()
                 .username(userLogin)
                 .password(passwordEncoder.encode(password))
-                .roles(Set.of(userRole))
+                .roles(roleSet)
                 .build();
         user = userRepository.save(user);
+//        user.setRoles(Set.of(userRole));
+//        user = userRepository.save(user);
         diagramAppService.createDefaultWorkaround(user.getId(), user.getUsername());
         return user;
     }
