@@ -1,4 +1,4 @@
-package org.maslov.template.model;
+package org.maslov.template.diagramapp.model;
 
 public enum DiagramAccountStatus {
     ACTIVE,

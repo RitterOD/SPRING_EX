@@ -1,4 +1,4 @@
-package org.maslov.template.controller;
+package org.maslov.template.diagramapp.controller;
 
 import org.maslov.template.user.configuration.RestURL;
 import org.springframework.http.ResponseEntity;
@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(RestURL.API_V1_HOME)
-public class AppController {
+@RequestMapping(RestURL.API_V1_DIAG)
+public class DiagramController {
 
   @GetMapping
-  public ResponseEntity<String> getHome() {
-    return ResponseEntity.ok().body("Spring Security Template Application");
+  public ResponseEntity<String> getAllDiagrams() {
+    return ResponseEntity.ok().body("ALL DIAGRAMS STUB IMPLEMENTATION");
   }
 }
