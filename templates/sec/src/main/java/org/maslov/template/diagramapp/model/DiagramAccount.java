@@ -1,10 +1,7 @@
 package org.maslov.template.diagramapp.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -13,6 +10,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder(toBuilder = true)
 public class DiagramAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -27,4 +25,7 @@ public class DiagramAccount {
 
     @OneToMany(mappedBy = "account")
     private List<DiagramWorkspace> workspaces;
+
+    @Column(name = "owner_id")
+    private Long ownerId;
 }

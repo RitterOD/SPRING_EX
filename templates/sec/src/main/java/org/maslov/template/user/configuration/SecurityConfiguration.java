@@ -2,7 +2,7 @@ package org.maslov.template.user.configuration;
 
 import org.maslov.template.user.component.JwtTokenAuthenticationFilter;
 import org.maslov.template.user.service.JWTUtils;
-import org.maslov.template.user.service.UserDetailsServiceSpringDataImpl;
+import org.maslov.template.user.service.UserDetailsServiceSpringData;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -18,11 +18,11 @@ import org.springframework.security.web.access.ExceptionTranslationFilter;
 @Configuration
 public class SecurityConfiguration {
 
-  private final UserDetailsServiceSpringDataImpl userDetailsServiceSpringData;
+  private final UserDetailsServiceSpringData userDetailsServiceSpringData;
   private final JWTUtils jwtUtils;
 
 
-  public SecurityConfiguration(UserDetailsServiceSpringDataImpl userDetailsServiceSpringData, JWTUtils jwtUtils) {
+  public SecurityConfiguration(UserDetailsServiceSpringData userDetailsServiceSpringData, JWTUtils jwtUtils) {
     this.userDetailsServiceSpringData = userDetailsServiceSpringData;
     this.jwtUtils = jwtUtils;
   }

@@ -6,10 +6,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
-public class DiagramEntryServiceImpl implements DiagramEntryService{
+public class DiagramEntryDefaultService implements DiagramEntryService{
     private final DiagramEntryRepository diagramEntryRepository;
 
-    public DiagramEntryServiceImpl(DiagramEntryRepository diagramEntryRepository) {
+    public DiagramEntryDefaultService(DiagramEntryRepository diagramEntryRepository) {
         this.diagramEntryRepository = diagramEntryRepository;
     }
 }

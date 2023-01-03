@@ -5,7 +5,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.maslov.template.user.service.JWTUtils;
-import org.maslov.template.user.service.UserDetailsServiceSpringDataImpl;
+import org.maslov.template.user.service.UserDetailsServiceSpringData;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,10 +14,10 @@ import java.io.IOException;
 
 public class JwtTokenAuthenticationFilter extends GenericFilter {
 
-    private final UserDetailsServiceSpringDataImpl userDetailsServiceSpringData;
+    private final UserDetailsServiceSpringData userDetailsServiceSpringData;
     private final JWTUtils jwtUtils;
 
-    public JwtTokenAuthenticationFilter(UserDetailsServiceSpringDataImpl userDetailsServiceSpringData, JWTUtils jwtUtils) {
+    public JwtTokenAuthenticationFilter(UserDetailsServiceSpringData userDetailsServiceSpringData, JWTUtils jwtUtils) {
         this.userDetailsServiceSpringData = userDetailsServiceSpringData;
         this.jwtUtils = jwtUtils;
     }

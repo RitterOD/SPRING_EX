@@ -1,10 +1,16 @@
 package org.maslov.template.diagramapp.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder(toBuilder = true)
 @Table(name = "diagram_worksapce")
 public class DiagramWorkspace {
 
