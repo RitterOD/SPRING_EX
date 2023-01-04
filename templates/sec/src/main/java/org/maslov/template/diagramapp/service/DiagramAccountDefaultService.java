@@ -38,4 +38,14 @@ public class DiagramAccountDefaultService implements DiagramAccountService{
         return account;
     }
 
+    @Override
+    public DiagramAccount getRefById(Long id) {
+        return diagramAccountRepository.getReferenceById(id);
+    }
+
+    @Override
+    public List<DiagramAccount> findAllByOwnerId(Long ownerId) {
+        return diagramAccountRepository.findAllByOwnerId(ownerId);
+    }
+
 }

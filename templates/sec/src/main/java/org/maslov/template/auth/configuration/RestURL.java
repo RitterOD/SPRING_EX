@@ -8,11 +8,18 @@ public interface RestURL {
 
     String API_V1_HOME_REL = "/home";
     String API_V1_CREATE_REL = "/create";
+    String API_V1_DIAG_ACCOUNTS_REL = "/accounts";
+    String API_V1_DIAG_WORKSPACES_REL = "/workspaces";
 
     String API_V1_AUTH = API_V1 + API_V1_AUTH_REL;
     String API_V1_AUTH_CREATE = API_V1 + API_V1_AUTH_REL + API_V1_CREATE_REL;
     String API_V1_DIAG = API_V1 + API_V1_DIAG_REL;
     String API_V1_HOME = API_V1 + API_V1_HOME_REL;
+
+
+
+    String API_V1_DIAG_ACCOUNTS = API_V1 + API_V1_DIAG_REL + API_V1_DIAG_ACCOUNTS_REL ;
+    String API_V1_DIAG_WORKSPACES = API_V1 + API_V1_DIAG_REL + API_V1_DIAG_WORKSPACES_REL;
 
 
 

@@ -49,8 +49,6 @@ public class UserServiceSpringData implements UserService{
                 .roles(roleSet)
                 .build();
         user = userRepository.save(user);
-//        user.setRoles(Set.of(userRole));
-//        user = userRepository.save(user);
         diagramAppService.createDefaultWorkaround(user.getId(), user.getUsername());
         return user;
     }

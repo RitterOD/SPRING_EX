@@ -36,7 +36,7 @@ public class JwtTokenAuthenticationFilter extends GenericFilter {
                 try {
                     String login = jwtUtils.validateTokenAndRetrieveSubject(jwt);
                     UserDetails userDetails = userDetailsServiceSpringData.loadUserByUsername(login);
-                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(login, userDetails.getPassword(), userDetails.getAuthorities());
+                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
                     if (SecurityContextHolder.getContext().getAuthentication() == null ||
                             SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken) {
                         SecurityContextHolder.getContext().setAuthentication(authToken);

@@ -54,7 +54,18 @@ public class SecurityConfiguration {
                     .permitAll())
             .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST, RestURL.API_V1_AUTH)
                     .permitAll())
-            .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.GET, RestURL.API_V1_DIAG)
+            .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.GET,
+                            RestURL.API_V1_DIAG,
+                            RestURL.API_V1_DIAG + "/**",
+                            RestURL.API_V1_DIAG_ACCOUNTS,
+                            RestURL.API_V1_DIAG_ACCOUNTS + "/**",
+                            RestURL.API_V1_DIAG_WORKSPACES,
+                            RestURL.API_V1_DIAG_WORKSPACES + "/**")
+                    .hasAnyRole("USER", "ADMIN"))
+            .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST,
+                            RestURL.API_V1_DIAG,
+                            RestURL.API_V1_DIAG_ACCOUNTS,
+                            RestURL.API_V1_DIAG_WORKSPACES)
                     .hasAnyRole("USER", "ADMIN"))
             .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST, RestURL.API_V1_AUTH_CREATE)
                   .hasAnyRole("ADMIN"));
