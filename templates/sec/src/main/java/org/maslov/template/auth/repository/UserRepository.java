@@ -1,0 +1,12 @@
+package org.maslov.template.auth.repository;
+
+
+import org.maslov.template.auth.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+
+    Optional<User> findByUsername(String username);
+}

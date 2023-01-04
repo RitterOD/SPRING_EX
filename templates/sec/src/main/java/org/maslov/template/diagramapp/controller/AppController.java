@@ -1,6 +1,6 @@
 package org.maslov.template.diagramapp.controller;
 
-import org.maslov.template.user.configuration.RestURL;
+import org.maslov.template.auth.configuration.RestURL;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
