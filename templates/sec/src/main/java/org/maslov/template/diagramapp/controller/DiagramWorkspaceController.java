@@ -4,7 +4,6 @@ import org.maslov.template.auth.AuthService;
 import org.maslov.template.auth.configuration.RestURL;
 import org.maslov.template.diagramapp.model.dto.DiagramWorkspaceDTO;
 import org.maslov.template.diagramapp.model.mapper.DiagramWorkspaceMapper;
-import org.maslov.template.diagramapp.service.DiagramAccountService;
 import org.maslov.template.diagramapp.service.DiagramWorkspaceService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,15 +16,14 @@ import java.util.List;
 public class DiagramWorkspaceController {
 
     private final DiagramWorkspaceService diagramWorkspaceService;
-    private final DiagramAccountService diagramAccountService;
+
 
     private final DiagramWorkspaceMapper diagramWorkspaceMapper;
 
     private final AuthService authService;
 
-    public DiagramWorkspaceController(DiagramWorkspaceService diagramWorkspaceService, DiagramAccountService diagramAccountService, DiagramWorkspaceMapper diagramWorkspaceMapper, AuthService authService) {
+    public DiagramWorkspaceController(DiagramWorkspaceService diagramWorkspaceService, DiagramWorkspaceMapper diagramWorkspaceMapper, AuthService authService) {
         this.diagramWorkspaceService = diagramWorkspaceService;
-        this.diagramAccountService = diagramAccountService;
         this.diagramWorkspaceMapper = diagramWorkspaceMapper;
         this.authService = authService;
     }

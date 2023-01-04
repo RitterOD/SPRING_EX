@@ -64,6 +64,7 @@ public class SecurityConfiguration {
                     .hasAnyRole("USER", "ADMIN"))
             .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST,
                             RestURL.API_V1_DIAG,
+                            RestURL.API_V1_DIAG + "/**",
                             RestURL.API_V1_DIAG_ACCOUNTS,
                             RestURL.API_V1_DIAG_WORKSPACES)
                     .hasAnyRole("USER", "ADMIN"))

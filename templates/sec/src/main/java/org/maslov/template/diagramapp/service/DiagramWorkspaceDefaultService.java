@@ -7,6 +7,7 @@ import org.maslov.template.diagramapp.repository.DiagramWorkspaceRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -25,5 +26,10 @@ public class DiagramWorkspaceDefaultService implements DiagramWorkspaceService{
     @Override
     public List<DiagramWorkspace> findAllByOwnerId(Long ownerId) {
         return diagramWorkspaceRepository.findAllByOwnerId(ownerId);
+    }
+
+    @Override
+    public Optional<DiagramWorkspace> findById(Long id) {
+        return diagramWorkspaceRepository.findById(id);
     }
 }

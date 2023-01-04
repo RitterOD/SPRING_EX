@@ -1,16 +1,21 @@
 package org.maslov.template.diagramapp.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder(toBuilder = true)
 @Entity
-@Table(name = "diagrams")
+@Table(name = Diagram.TABLE_NAME)
 public class Diagram {
+
+    public static final String TABLE_NAME = "diagrams";
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -27,4 +32,7 @@ public class Diagram {
     @ManyToOne
     @JoinColumn(name = "workspace_id")
     private DiagramWorkspace workspace;
+
+    @Column(name = "owner_id")
+    private Long ownerId;
 }
