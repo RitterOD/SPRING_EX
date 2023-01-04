@@ -11,8 +11,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-@Table(name = "diagram_worksapce")
+@Table(name = DiagramWorkspace.TABLE_NAME)
 public class DiagramWorkspace {
+
+
+    public static final String TABLE_NAME = "diagram_workspaces";
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -22,13 +25,13 @@ public class DiagramWorkspace {
     private String name;
 
     @Enumerated(value = EnumType.STRING)
-    @Column(name = "status")
+    @Column(name = "status",  nullable = false)
     private DiagramWorkspaceStatus status;
 
     @OneToMany(mappedBy = "workspace")
     private List<Diagram> diagrams;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "account_id")
     private DiagramAccount account;
 }

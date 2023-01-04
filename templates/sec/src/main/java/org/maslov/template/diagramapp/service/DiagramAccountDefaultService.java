@@ -2,6 +2,7 @@ package org.maslov.template.diagramapp.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.maslov.template.diagramapp.model.DiagramAccount;
+import org.maslov.template.diagramapp.model.DiagramAccountStatus;
 import org.maslov.template.diagramapp.model.DiagramWorkspace;
 import org.maslov.template.diagramapp.model.DiagramWorkspaceStatus;
 import org.maslov.template.diagramapp.repository.DiagramAccountRepository;
@@ -29,6 +30,7 @@ public class DiagramAccountDefaultService implements DiagramAccountService{
         var account = DiagramAccount.builder()
                 .ownerId(ownerId)
                 .name(ownerLogin)
+                .status(DiagramAccountStatus.ACTIVE)
                 .workspaces(List.of(workspace))
                 .build();
         workspace.setAccount(account);

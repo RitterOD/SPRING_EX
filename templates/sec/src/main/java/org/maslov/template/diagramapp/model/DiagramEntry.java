@@ -9,11 +9,16 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
+@Table(name = DiagramEntry.TABLE_NAME)
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class DiagramEntry {
+
+
+    public static final String TABLE_NAME = "diagram_entries";
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;

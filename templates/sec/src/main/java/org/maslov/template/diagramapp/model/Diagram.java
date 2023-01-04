@@ -18,6 +18,7 @@ public class Diagram {
     private String name;
 
     @Enumerated(value = EnumType.STRING)
+    @Column(name = "status", nullable = false)
     private DiagramStatus status;
 
     @OneToMany(mappedBy = "diagram")
