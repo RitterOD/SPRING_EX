@@ -21,4 +21,9 @@ public class DiagramWorkspaceDefaultService implements DiagramWorkspaceService{
     public List<DiagramWorkspace> findAllByDiagramAccount(DiagramAccount diagramAccount) {
         return diagramWorkspaceRepository.findAllByAccount(diagramAccount);
     }
+
+    @Override
+    public List<DiagramWorkspace> findAllByOwnerId(Long ownerId) {
+        return diagramWorkspaceRepository.findAllByOwnerId(ownerId);
+    }
 }

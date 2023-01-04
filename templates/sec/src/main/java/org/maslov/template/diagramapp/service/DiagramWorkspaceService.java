@@ -9,4 +9,5 @@ public interface DiagramWorkspaceService {
     String DEFAULT_WORKSPACE_NAME = "default_workspace";
 
     public List<DiagramWorkspace> findAllByDiagramAccount(DiagramAccount diagramAccount);
+    public List<DiagramWorkspace> findAllByOwnerId(Long ownerId);
 }

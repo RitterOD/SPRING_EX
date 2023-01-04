@@ -1,5 +1,6 @@
 package org.maslov.template.diagramapp.controller;
 
+import org.maslov.template.auth.AuthService;
 import org.maslov.template.auth.configuration.RestURL;
 import org.maslov.template.diagramapp.model.dto.DiagramWorkspaceDTO;
 import org.maslov.template.diagramapp.model.mapper.DiagramWorkspaceMapper;
@@ -20,16 +21,19 @@ public class DiagramWorkspaceController {
 
     private final DiagramWorkspaceMapper diagramWorkspaceMapper;
 
-    public DiagramWorkspaceController(DiagramWorkspaceService diagramWorkspaceService, DiagramAccountService diagramAccountService, DiagramWorkspaceMapper diagramWorkspaceMapper) {
+    private final AuthService authService;
+
+    public DiagramWorkspaceController(DiagramWorkspaceService diagramWorkspaceService, DiagramAccountService diagramAccountService, DiagramWorkspaceMapper diagramWorkspaceMapper, AuthService authService) {
         this.diagramWorkspaceService = diagramWorkspaceService;
         this.diagramAccountService = diagramAccountService;
         this.diagramWorkspaceMapper = diagramWorkspaceMapper;
+        this.authService = authService;
     }
 
-    @GetMapping("/all")
-    public List<DiagramWorkspaceDTO> getAllByDiagramAccount(Long diagramAccountId) {
-        var diagramAccount = diagramAccountService.getRefById(diagramAccountId);
-        var workspaces = diagramWorkspaceService.findAllByDiagramAccount(diagramAccount);
+    @GetMapping("/all/owner_id")
+    public List<DiagramWorkspaceDTO> getAllByDiagramAccount() {
+        var user = authService.getUser();
+        var workspaces = diagramWorkspaceService.findAllByOwnerId(user.getId());
         return diagramWorkspaceMapper.map(workspaces, null);
     }
 }

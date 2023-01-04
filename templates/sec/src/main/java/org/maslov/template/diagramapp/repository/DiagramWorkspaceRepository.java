@@ -9,4 +9,5 @@ import java.util.List;
 public interface DiagramWorkspaceRepository extends JpaRepository<DiagramWorkspace, Long> {
 
     List<DiagramWorkspace> findAllByAccount(DiagramAccount diagramAccount);
+    List<DiagramWorkspace> findAllByOwnerId(Long ownerId);
 }

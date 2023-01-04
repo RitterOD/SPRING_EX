@@ -34,4 +34,6 @@ public class DiagramWorkspace {
     @ManyToOne()
     @JoinColumn(name = "account_id")
     private DiagramAccount account;
+
+    private Long ownerId;
 }
