@@ -1,20 +1,18 @@
 package org.maslov.template.diagramapp.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
-@Table(name = DiagramEntry.TABLE_NAME)
+@Table(name = DiagramNode.TABLE_NAME)
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DiagramEntry {
+@Builder(toBuilder = true)
+public class DiagramNode {
 
 
     public static final String TABLE_NAME = "diagram_entries";
@@ -24,14 +22,14 @@ public class DiagramEntry {
     private Long id;
 
     @Column(columnDefinition = "TEXT")
-    private Long text;
+    private String text;
 
     @OneToMany(mappedBy = "father")
-    private List<DiagramEntry> entries;
+    private List<DiagramNode> entries;
 
     @ManyToOne
     @JoinColumn(name = "father_id")
-    private DiagramEntry father;
+    private DiagramNode father;
 
     @ManyToOne
     @JoinColumn(name = "diagram_id")

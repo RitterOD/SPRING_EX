@@ -4,9 +4,11 @@ import org.maslov.template.auth.AuthService;
 import org.maslov.template.auth.configuration.RestURL;
 import org.maslov.template.diagramapp.model.DiagramStatus;
 import org.maslov.template.diagramapp.model.dto.DiagramDTO;
+import org.maslov.template.diagramapp.model.dto.NodeDTO;
 import org.maslov.template.diagramapp.model.mapper.DiagramMapper;
+import org.maslov.template.diagramapp.model.mapper.NodeMapper;
+import org.maslov.template.diagramapp.model.request.CreateDiagramNodeRequest;
 import org.maslov.template.diagramapp.model.request.CreateDiagramRequest;
-import org.maslov.template.diagramapp.model.response.CreateDiagramResponse;
 import org.maslov.template.diagramapp.service.DiagramService;
 import org.maslov.template.diagramapp.service.DiagramWorkspaceService;
 import org.springframework.http.HttpStatus;
@@ -26,12 +28,14 @@ public class DiagramController {
     private final AuthService authService;
 
     private final DiagramMapper diagramMapper;
+    private final NodeMapper nodeMapper;
 
-    public DiagramController(DiagramService diagramService, DiagramWorkspaceService diagramWorkspaceService, AuthService authService, DiagramMapper diagramMapper) {
+    public DiagramController(DiagramService diagramService, DiagramWorkspaceService diagramWorkspaceService, AuthService authService, DiagramMapper diagramMapper, NodeMapper nodeMapper) {
         this.diagramService = diagramService;
         this.diagramWorkspaceService = diagramWorkspaceService;
         this.authService = authService;
       this.diagramMapper = diagramMapper;
+        this.nodeMapper = nodeMapper;
     }
 
     @GetMapping("/all/by_owner_id")
@@ -43,7 +47,7 @@ public class DiagramController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<DiagramDTO> processCreateDiagramResponse(@RequestBody CreateDiagramRequest createDiagramRequest) {
+    public ResponseEntity<DiagramDTO> processCreateDiagram(@RequestBody CreateDiagramRequest createDiagramRequest) {
         var user = authService.getUser();
         var workSpaceOpt = diagramWorkspaceService.findById(createDiagramRequest.getWorkspaceId());
         if (workSpaceOpt.isEmpty()) {
@@ -53,6 +57,20 @@ public class DiagramController {
         } else {
            var diagram =  diagramService.createDiagram(workSpaceOpt.get(), createDiagramRequest.getDiagramName(), DiagramStatus.ACTIVE, user.getId());
            return ResponseEntity.ok().body(diagramMapper.map(diagram, null));
+        }
+    }
+
+    @PostMapping("/node/create")
+    public ResponseEntity<NodeDTO> processCreateDiagramNode(@RequestBody CreateDiagramNodeRequest createDiagramRequest) {
+        var user = authService.getUser();
+        var diagramOpt = diagramService.findById(createDiagramRequest.getDiagramId());
+        if (diagramOpt.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else if (!Objects.equals(diagramOpt.get().getOwnerId(), user.getId())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        } else {
+            var diagram =  diagramService.createDiagramNode(diagramOpt.get(), createDiagramRequest.getText());
+            return ResponseEntity.ok().body(nodeMapper.map(diagram, null));
         }
     }
 }

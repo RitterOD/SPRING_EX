@@ -27,7 +27,7 @@ public class Diagram {
     private DiagramStatus status;
 
     @OneToMany(mappedBy = "diagram")
-    private List<DiagramEntry> entryList;
+    private List<DiagramNode> entryList;
 
     @ManyToOne
     @JoinColumn(name = "workspace_id")
