@@ -7,6 +7,7 @@ import org.maslov.template.diagramapp.model.dto.DiagramDTO;
 import org.maslov.template.diagramapp.model.dto.NodeDTO;
 import org.maslov.template.diagramapp.model.mapper.DiagramMapper;
 import org.maslov.template.diagramapp.model.mapper.NodeMapper;
+import org.maslov.template.diagramapp.model.mapper.context.DiagramMapperContext;
 import org.maslov.template.diagramapp.model.request.CreateDiagramEdgeRequest;
 import org.maslov.template.diagramapp.model.request.CreateDiagramNodeRequest;
 import org.maslov.template.diagramapp.model.request.CreateDiagramRequest;
@@ -45,6 +46,20 @@ public class DiagramController {
       var diagrams = diagramService.findAllByOwnerId(user.getId());
       var dtos = diagrams.stream().map(e -> diagramMapper.map(e, null)).collect(Collectors.toList());
       return ResponseEntity.ok().body(dtos);
+    }
+
+    @GetMapping("/{diagramId}")
+    public ResponseEntity<DiagramDTO> getAllDiagrams(@PathVariable Long diagramId) {
+        var user = authService.getUser();
+        var diagramOpt = diagramService.findById(diagramId);
+        if (diagramOpt.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        if (!diagramOpt.get().getOwnerId().equals(user.getId())) {
+            return ResponseEntity.notFound().build();
+        }
+        var diagramDTO = diagramMapper.map(diagramOpt.get(), new DiagramMapperContext(true));
+        return ResponseEntity.ok().body(diagramDTO);
     }
 
     @PostMapping("/create")
