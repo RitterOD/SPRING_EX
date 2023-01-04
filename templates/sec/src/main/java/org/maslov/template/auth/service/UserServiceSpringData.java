@@ -38,6 +38,11 @@ public class UserServiceSpringData implements UserService{
     }
 
     @Override
+    public Optional<User> findByLogin(String login) {
+        return userRepository.findByUsername(login);
+    }
+
+    @Override
     @Transactional
     public User createUser(String userLogin, String password, UserRoleType role) {
         UserRole userRole = roleService.findByRoleType(role);
