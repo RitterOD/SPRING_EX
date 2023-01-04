@@ -90,6 +90,13 @@ public class DiagramController {
         }
     }
 
+    @GetMapping("/node/{nodeId}/adjacent")
+    public ResponseEntity<List<NodeDTO>> getAdjacentNode(@PathVariable Long nodeId) {
+        var user = authService.getUser();
+        List<NodeDTO> nodeDTOS = nodeMapper.map(diagramService.getAdjacentNode(nodeId, user.getId()), null);
+        return ResponseEntity.ok().body(nodeDTOS);
+    }
+
     @PostMapping("/edge/create")
     public ResponseEntity<List<NodeDTO>> processCreateDiagramEdge(@RequestBody CreateDiagramEdgeRequest createEdgeRequest) {
         var user = authService.getUser();

@@ -19,4 +19,6 @@ public interface DiagramService {
     DiagramNode createDiagramNode(Diagram diagram, String text);
 
     List<DiagramNode> createDiagramEdge(Long from, Long to, Long ownerId);
+
+    List<DiagramNode> getAdjacentNode(Long nodeId, Long ownerId);
 }

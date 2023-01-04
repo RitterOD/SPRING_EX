@@ -76,4 +76,18 @@ public class DiagramDefaultService implements DiagramService{
         diagramNodeRepository.save(nodeTo);
         return nodes;
     }
+
+    @Override
+    @Transactional
+    public List<DiagramNode> getAdjacentNode(Long nodeId, Long ownerId) {
+        Optional<DiagramNode> diagramNodeOpt = diagramNodeRepository.findById(nodeId);
+        if (diagramNodeOpt.isEmpty()) {
+            throw new IllegalArgumentException("Node.id : " + nodeId + "is not exist");
+        }
+        var node = diagramNodeOpt.get();
+        if (!node.getDiagram().getOwnerId().equals(ownerId)) {
+            throw new IllegalArgumentException("Node.id : " + nodeId + "is not owned by ownerId:" + ownerId);
+        }
+        return node.getEntries();
+    }
 }
