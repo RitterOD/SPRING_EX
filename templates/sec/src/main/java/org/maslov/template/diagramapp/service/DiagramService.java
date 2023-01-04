@@ -17,4 +17,6 @@ public interface DiagramService {
     Optional<Diagram> findById(Long id);
 
     DiagramNode createDiagramNode(Diagram diagram, String text);
+
+    List<DiagramNode> createDiagramEdge(Long from, Long to, Long ownerId);
 }

@@ -7,6 +7,7 @@ import org.maslov.template.diagramapp.model.dto.DiagramDTO;
 import org.maslov.template.diagramapp.model.dto.NodeDTO;
 import org.maslov.template.diagramapp.model.mapper.DiagramMapper;
 import org.maslov.template.diagramapp.model.mapper.NodeMapper;
+import org.maslov.template.diagramapp.model.request.CreateDiagramEdgeRequest;
 import org.maslov.template.diagramapp.model.request.CreateDiagramNodeRequest;
 import org.maslov.template.diagramapp.model.request.CreateDiagramRequest;
 import org.maslov.template.diagramapp.service.DiagramService;
@@ -72,5 +73,12 @@ public class DiagramController {
             var diagram =  diagramService.createDiagramNode(diagramOpt.get(), createDiagramRequest.getText());
             return ResponseEntity.ok().body(nodeMapper.map(diagram, null));
         }
+    }
+
+    @PostMapping("/edge/create")
+    public ResponseEntity<List<NodeDTO>> processCreateDiagramEdge(@RequestBody CreateDiagramEdgeRequest createEdgeRequest) {
+        var user = authService.getUser();
+        var nodes =  diagramService.createDiagramEdge(createEdgeRequest.getFromId(), createEdgeRequest.getToId(), user.getId());
+            return ResponseEntity.ok().body(nodeMapper.map(nodes, null));
     }
 }

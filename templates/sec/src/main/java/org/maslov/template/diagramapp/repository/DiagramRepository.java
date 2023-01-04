@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface DiagramRepository extends JpaRepository<Diagram, Long> {
     List<Diagram> findAllByOwnerId(Long ownerId);
+
 }
