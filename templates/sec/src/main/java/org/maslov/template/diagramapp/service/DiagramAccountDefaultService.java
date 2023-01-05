@@ -9,6 +9,7 @@ import org.maslov.template.diagramapp.repository.DiagramAccountRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.maslov.template.diagramapp.service.DiagramWorkspaceService.DEFAULT_WORKSPACE_NAME;
 
@@ -46,6 +47,11 @@ public class DiagramAccountDefaultService implements DiagramAccountService{
     @Override
     public List<DiagramAccount> findAllByOwnerId(Long ownerId) {
         return diagramAccountRepository.findAllByOwnerId(ownerId);
+    }
+
+    @Override
+    public Optional<DiagramAccount> findById(Long id) {
+        return diagramAccountRepository.findById(id);
     }
 
 }
