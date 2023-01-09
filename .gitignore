@@ -1,3 +1,17 @@
 /kafka-templates/kafka/simpleproducer/simpleproducer.iml
 /kafka-templates/kafka/simpleproducer/target/
 /kafka-templates/kafka/simpeconsumer/target/
+/archive/liquibaseapp/dbfile.mv.db
+/security/security-separation/auth-server/target/classes/
+/security/security-separation/auth-server/auth-server.iml
+/security/security-separation/auth-server/lineae.log
+/security/security-separation/auth-server/.idea/compiler.xml
+/security/security-separation/auth-server/.idea/encodings.xml
+/security/security-separation/auth-server/.idea/jarRepositories.xml
+/security/security-separation/auth-server/.idea/misc.xml
+/security/security-separation/auth-server/.idea/runConfigurations.xml
+/security/security-separation/auth-server/.idea/vcs.xml
+/security/security-hello/target/classes/org/maslov/
+/security/security-hello/.idea/
+/archive/simpleDAL/target/classes/
+/.idea/
