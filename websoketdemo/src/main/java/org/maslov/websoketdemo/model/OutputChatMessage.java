@@ -1,14 +1,14 @@
 package org.maslov.websoketdemo.model;
 
-public class OutputMessage {
+public class OutputChatMessage {
     private String from;
     private String text;
     private String time;
 
-    public OutputMessage() {
+    public OutputChatMessage() {
     }
 
-    public OutputMessage(String from, String text, String time) {
+    public OutputChatMessage(String from, String text, String time) {
         this.from = from;
         this.text = text;
         this.time = time;

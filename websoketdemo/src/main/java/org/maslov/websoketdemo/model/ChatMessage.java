@@ -1,13 +1,13 @@
 package org.maslov.websoketdemo.model;
 
-public class Message {
+public class ChatMessage {
     private String from;
     private String text;
 
-    public Message() {
+    public ChatMessage() {
     }
 
-    public Message(String from, String text) {
+    public ChatMessage(String from, String text) {
         this.from = from;
         this.text = text;
     }
