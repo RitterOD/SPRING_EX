@@ -2,7 +2,10 @@ package org.maslov.template.diagramapp.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
@@ -34,4 +37,12 @@ public class DiagramNode {
     @ManyToOne
     @JoinColumn(name = "diagram_id")
     private Diagram diagram;
+
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
+    private Timestamp createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private Timestamp updatedAt;
 }
