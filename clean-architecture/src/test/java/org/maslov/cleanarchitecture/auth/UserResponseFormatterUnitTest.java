@@ -1,4 +1,4 @@
-package org.maslov.cleanarchitecture.usercreation;
+package org.maslov.cleanarchitecture.auth;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -9,6 +9,15 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
 
+import org.maslov.cleanarchitecture.auth.adapter.rest.UserPresenter;
+import org.maslov.cleanarchitecture.auth.adapter.rest.UserResponseFormatter;
+import org.maslov.cleanarchitecture.auth.adapter.rest.UserResponseModel;
+import org.maslov.cleanarchitecture.auth.entity.CommonUser;
+import org.maslov.cleanarchitecture.auth.entity.UserFactory;
+import org.maslov.cleanarchitecture.auth.service.UserRegisterInteractor;
+import org.maslov.cleanarchitecture.auth.service.boundary.UserInputBoundary;
+import org.maslov.cleanarchitecture.auth.service.boundary.UserRegisterDsGateway;
+import org.maslov.cleanarchitecture.auth.service.boundary.UserRequestModel;
 import org.mockito.ArgumentCaptor;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.server.ResponseStatusException;

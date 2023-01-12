@@ -1,11 +1,13 @@
-package org.maslov.cleanarchitecture.usercreation;
+package org.maslov.cleanarchitecture.auth.entity;
 
-class CommonUser implements User {
+
+
+public class CommonUser implements User {
 
     String name;
     String password;
 
-    CommonUser(String name, String password) {
+    public CommonUser(String name, String password) {
         this.name = name;
         this.password = password;
     }

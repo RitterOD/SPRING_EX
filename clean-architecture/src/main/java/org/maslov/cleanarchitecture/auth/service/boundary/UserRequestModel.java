@@ -1,6 +1,6 @@
-package org.maslov.cleanarchitecture.usercreation;
+package org.maslov.cleanarchitecture.auth.service.boundary;
 
-class UserRequestModel {
+public class UserRequestModel {
 
     String name;
     String password;
@@ -9,25 +9,25 @@ class UserRequestModel {
         super();
     }
 
-    UserRequestModel(String name, String password) {
+    public UserRequestModel(String name, String password) {
         super();
         this.name = name;
         this.password = password;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 
-    void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    String getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 }

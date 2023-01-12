@@ -1,8 +1,10 @@
-package org.maslov.cleanarchitecture.usercreation;
+package org.maslov.cleanarchitecture.auth;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
+import org.maslov.cleanarchitecture.auth.entity.CommonUser;
+import org.maslov.cleanarchitecture.auth.entity.User;
 
 class UserUnitTest {
 

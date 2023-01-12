@@ -1,4 +1,4 @@
-package org.maslov.cleanarchitecture.usercreation;
+package org.maslov.cleanarchitecture.auth.adapter.rest;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
-class UserResponseFormatter implements UserPresenter {
+public class UserResponseFormatter implements UserPresenter {
 
     @Override
     public UserResponseModel prepareSuccessView(UserResponseModel response) {

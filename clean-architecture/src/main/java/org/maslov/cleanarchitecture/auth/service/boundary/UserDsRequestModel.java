@@ -1,28 +1,14 @@
-package org.maslov.cleanarchitecture.usercreation;
+package org.maslov.cleanarchitecture.auth.service.boundary;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 
+public class UserDsRequestModel {
 
-
-@Entity
-@Table(name = "user")
-class UserDataMapper {
-
-    @Id
     String name;
-
     String password;
-
     LocalDateTime creationTime;
 
-    public UserDataMapper() {
-    }
-
-    public UserDataMapper(String name, String password, LocalDateTime creationTime) {
-        super();
+    public UserDsRequestModel(String name, String password, LocalDateTime creationTime) {
         this.name = name;
         this.password = password;
         this.creationTime = creationTime;
@@ -51,4 +37,5 @@ class UserDataMapper {
     public void setCreationTime(LocalDateTime creationTime) {
         this.creationTime = creationTime;
     }
+
 }

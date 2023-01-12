@@ -20,5 +20,6 @@
     2. hib - template of usage hibernate and hibernate envers
     3. sec - spring security rest api with jwt token auth
 15. websocket demo - demo of usage websocket with spring boot
+16. clean-architecture - example of clean arch
 
    

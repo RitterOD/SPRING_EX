@@ -1,14 +1,22 @@
-package org.maslov.cleanarchitecture.usercreation;
+package org.maslov.cleanarchitecture.auth.service;
 
 import java.time.LocalDateTime;
+import org.maslov.cleanarchitecture.auth.service.boundary.UserDsRequestModel;
+import org.maslov.cleanarchitecture.auth.service.boundary.UserInputBoundary;
+import org.maslov.cleanarchitecture.auth.adapter.rest.UserPresenter;
+import org.maslov.cleanarchitecture.auth.service.boundary.UserRegisterDsGateway;
+import org.maslov.cleanarchitecture.auth.service.boundary.UserRequestModel;
+import org.maslov.cleanarchitecture.auth.adapter.rest.UserResponseModel;
+import org.maslov.cleanarchitecture.auth.entity.User;
+import org.maslov.cleanarchitecture.auth.entity.UserFactory;
 
-class UserRegisterInteractor implements UserInputBoundary {
+public class UserRegisterInteractor implements UserInputBoundary {
 
     final UserRegisterDsGateway userDsGateway;
     final UserPresenter userPresenter;
     final UserFactory userFactory;
 
-    UserRegisterInteractor(UserRegisterDsGateway userRegisterDfGateway, UserPresenter userPresenter,
+    public UserRegisterInteractor(UserRegisterDsGateway userRegisterDfGateway, UserPresenter userPresenter,
         UserFactory userFactory) {
         this.userDsGateway = userRegisterDfGateway;
         this.userPresenter = userPresenter;

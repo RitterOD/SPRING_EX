@@ -1,6 +1,6 @@
-package org.maslov.cleanarchitecture.usercreation;
+package org.maslov.cleanarchitecture.auth.entity;
 
-interface User {
+public interface User {
     boolean passwordIsValid();
 
     String getName();

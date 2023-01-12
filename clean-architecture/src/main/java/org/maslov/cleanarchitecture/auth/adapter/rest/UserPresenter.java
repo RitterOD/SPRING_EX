@@ -1,6 +1,6 @@
-package org.maslov.cleanarchitecture.usercreation;
+package org.maslov.cleanarchitecture.auth.adapter.rest;
 
-interface UserPresenter {
+public interface UserPresenter {
     UserResponseModel prepareSuccessView(UserResponseModel user);
 
     UserResponseModel prepareFailView(String error);

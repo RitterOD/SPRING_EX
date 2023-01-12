@@ -1,4 +1,4 @@
-package org.maslov.cleanarchitecture.usercreation;
+package org.maslov.cleanarchitecture.auth.adapter.rest;
 
 public class UserResponseModel {
 

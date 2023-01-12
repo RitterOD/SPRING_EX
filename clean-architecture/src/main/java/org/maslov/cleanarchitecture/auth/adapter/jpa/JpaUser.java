@@ -1,6 +1,11 @@
-package org.maslov.cleanarchitecture.usercreation;
+package org.maslov.cleanarchitecture.auth.adapter.jpa;
 
-class JpaUser implements UserRegisterDsGateway {
+import org.maslov.cleanarchitecture.auth.adapter.jpa.model.UserDataMapper;
+import org.maslov.cleanarchitecture.auth.adapter.jpa.repository.JpaUserRepository;
+import org.maslov.cleanarchitecture.auth.service.boundary.UserDsRequestModel;
+import org.maslov.cleanarchitecture.auth.service.boundary.UserRegisterDsGateway;
+
+public class JpaUser implements UserRegisterDsGateway {
 
     final JpaUserRepository repository;
 
