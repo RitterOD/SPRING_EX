@@ -25,12 +25,20 @@ services:
     container_name: app
     ports:
       - "8080:8080"
-#    environment:
-#      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/retail_rrcb_db_dev?useUnicode=yes&characterEncoding=UTF-8&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&cachePrepStmts=true&useServerPrepStmts=true&rewriteBatchedStatements=true
-#      - SPRING_DATASOURCE_USERNAME=retail_rrcb_db_dev
-#      - SPRING_DATASOURCE_PASSWORD=retail_rrcb_db_dev
-#      - SPRING_FLYWAY_SCHEMAS=retail_rrcb_db_dev
-#      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    networks:
+      monitoring:
+
+  grafana:
+    image: grafana/grafana-oss:8.5.2
+    container_name: grafana
+    restart: unless-stopped
+#    volumes:
+#      - ./infra/data/grafana:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SERVER_DOMAIN=localhost
+    ports:
+      - "3000:3000"
     networks:
       monitoring:
 
