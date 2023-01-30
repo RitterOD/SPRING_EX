@@ -34,7 +34,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./infra/data/grafana:/var/lib/grafana:rw
-    user: "1000"
+    user: "${GRAFANA_USER_ID}"
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin
       - GF_SERVER_DOMAIN=localhost
