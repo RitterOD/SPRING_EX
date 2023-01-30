@@ -29,16 +29,19 @@ services:
       monitoring:
 
   grafana:
-    image: grafana/grafana-oss:8.5.2
+    image: grafana/grafana:8.2.6
     container_name: grafana
     restart: unless-stopped
-#    volumes:
-#      - ./infra/data/grafana:/var/lib/grafana
+    volumes:
+      - ./infra/data/grafana:/var/lib/grafana:rw
+    user: "1000"
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin
       - GF_SERVER_DOMAIN=localhost
     ports:
       - "3000:3000"
+    links:
+      - prometheus
     networks:
       monitoring:
 
