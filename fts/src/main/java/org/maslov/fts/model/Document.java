@@ -1,8 +1,7 @@
 package org.maslov.fts.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.UUID;
 
@@ -10,6 +9,9 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "document")
+@NoArgsConstructor
+@Builder(toBuilder = true)
+@AllArgsConstructor
 public class Document {
     @Id
     @Column(name = "id", nullable = false)
@@ -24,4 +26,36 @@ public class Document {
 
     @Column(name = "author",  columnDefinition = "TEXT")
     private String author;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 }

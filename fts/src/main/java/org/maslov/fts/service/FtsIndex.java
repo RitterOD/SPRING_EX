@@ -15,6 +15,7 @@ import org.apache.lucene.util.BytesRef;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class FtsIndex {
 
@@ -28,7 +29,7 @@ public class FtsIndex {
 
 
 
-    public void indexDocument(String title, String body) {
+    public void indexDocument(String title, String body, UUID id) {
 
         IndexWriterConfig indexWriterConfig = new IndexWriterConfig(analyzer);
         try {
@@ -37,6 +38,9 @@ public class FtsIndex {
 
             document.add(new TextField("title", title, Field.Store.YES));
             document.add(new TextField("body", body, Field.Store.YES));
+            if (id != null) {
+                document.add(new TextField("id", id.toString(), Field.Store.YES));
+            }
             document.add(new SortedDocValuesField("title", new BytesRef(title)));
 
             writer.addDocument(document);
