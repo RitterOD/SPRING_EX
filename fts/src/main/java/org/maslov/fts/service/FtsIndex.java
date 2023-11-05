@@ -8,7 +8,6 @@ import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.*;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
-import org.apache.lucene.queryparser.flexible.standard.StandardQueryParser;
 import org.apache.lucene.search.*;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.util.BytesRef;
@@ -17,14 +16,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InMemoryLuceneIndex {
+public class FtsIndex {
 
-    private Directory memoryIndex;
+    private Directory directory;
     private Analyzer analyzer;
 
-    public InMemoryLuceneIndex(Directory memoryIndex, Analyzer analyzer) {
-        super();
-        this.memoryIndex = memoryIndex;
+    public FtsIndex(Directory directory, Analyzer analyzer) {
+        this.directory = directory;
         this.analyzer = analyzer;
     }
 
@@ -34,7 +32,7 @@ public class InMemoryLuceneIndex {
 
         IndexWriterConfig indexWriterConfig = new IndexWriterConfig(analyzer);
         try {
-            IndexWriter writer = new IndexWriter(memoryIndex, indexWriterConfig);
+            IndexWriter writer = new IndexWriter(directory, indexWriterConfig);
             Document document = new Document();
 
             document.add(new TextField("title", title, Field.Store.YES));
@@ -52,7 +50,7 @@ public class InMemoryLuceneIndex {
         try {
             Query query = new QueryParser(inField, analyzer).parse(queryString);
 
-            IndexReader indexReader = DirectoryReader.open(memoryIndex);
+            IndexReader indexReader = DirectoryReader.open(directory);
             IndexSearcher searcher = new IndexSearcher(indexReader);
             TopDocs topDocs = searcher.search(query, n);
             List<Document> documents = new ArrayList<>();
@@ -71,7 +69,7 @@ public class InMemoryLuceneIndex {
     public void deleteDocument(Term term) {
         try {
             IndexWriterConfig indexWriterConfig = new IndexWriterConfig(analyzer);
-            IndexWriter writer = new IndexWriter(memoryIndex, indexWriterConfig);
+            IndexWriter writer = new IndexWriter(directory, indexWriterConfig);
             writer.deleteDocuments(term);
             writer.close();
         } catch (IOException e) {
@@ -81,7 +79,7 @@ public class InMemoryLuceneIndex {
 
     public List<Document> searchIndex(Query query, int n) {
         try {
-            IndexReader indexReader = DirectoryReader.open(memoryIndex);
+            IndexReader indexReader = DirectoryReader.open(directory);
             IndexSearcher searcher = new IndexSearcher(indexReader);
             TopDocs topDocs = searcher.search(query, n);
             List<Document> documents = new ArrayList<>();
@@ -99,7 +97,7 @@ public class InMemoryLuceneIndex {
 
     public List<Document> searchIndex(Query query, Sort sort) {
         try {
-            IndexReader indexReader = DirectoryReader.open(memoryIndex);
+            IndexReader indexReader = DirectoryReader.open(directory);
             IndexSearcher searcher = new IndexSearcher(indexReader);
             TopDocs topDocs = searcher.search(query, 10, sort);
             List<Document> documents = new ArrayList<>();
