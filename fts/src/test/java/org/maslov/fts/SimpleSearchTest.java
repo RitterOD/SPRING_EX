@@ -21,7 +21,7 @@ public class SimpleSearchTest {
     @Test
     public void simpleSearch() {
         FtsIndex inMemoryLuceneIndex = new FtsIndex(new  ByteBuffersDirectory(), new StandardAnalyzer());
-        inMemoryLuceneIndex.indexDocument("Hello world", "Some hello world ", null);
+        inMemoryLuceneIndex.indexDocument("Hello world", "Some hello world ", null, null);
 
         List<Document> documents = inMemoryLuceneIndex.searchIndex("body", "world", 10);
 
@@ -31,8 +31,8 @@ public class SimpleSearchTest {
     @Test
     public void termQuery() {
         FtsIndex inMemoryLuceneIndex = new FtsIndex(new  ByteBuffersDirectory(), new StandardAnalyzer());
-        inMemoryLuceneIndex.indexDocument("MCU", "MCUs usually run embedded software", null);
-        inMemoryLuceneIndex.indexDocument("CPU", "CPUs usually run business applications", null);
+        inMemoryLuceneIndex.indexDocument("MCU", "MCUs usually run embedded software", null, null);
+        inMemoryLuceneIndex.indexDocument("CPU", "CPUs usually run business applications", null, null);
         // note put lowcase text in term constructor
         var term = new Term("title", "cpu");
         var query = new TermQuery(term);
@@ -44,8 +44,8 @@ public class SimpleSearchTest {
     @Test
     public void prefixQuery() {
         FtsIndex inMemoryLuceneIndex = new FtsIndex(new  ByteBuffersDirectory(), new StandardAnalyzer());
-        inMemoryLuceneIndex.indexDocument("network", "host local", null);
-        inMemoryLuceneIndex.indexDocument("local network", "local host", null);
+        inMemoryLuceneIndex.indexDocument("network", "host local", null, null);
+        inMemoryLuceneIndex.indexDocument("local network", "local host", null, null);
         // note put lowcase text in term constructor
         var term = new Term("body", "local");
         var query = new TermQuery(term);

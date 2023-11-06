@@ -11,6 +11,7 @@ import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.*;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.util.BytesRef;
+import org.maslov.fts.exception.FtsException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class FtsIndex {
 
 
 
-    public void indexDocument(String title, String body, UUID id) {
+    public void indexDocument(String title, String body, String author, UUID id) {
 
         IndexWriterConfig indexWriterConfig = new IndexWriterConfig(analyzer);
         try {
@@ -41,12 +42,15 @@ public class FtsIndex {
             if (id != null) {
                 document.add(new TextField("id", id.toString(), Field.Store.YES));
             }
+            if (author != null) {
+                document.add(new TextField("author", author, Field.Store.YES));
+            }
             document.add(new SortedDocValuesField("title", new BytesRef(title)));
 
             writer.addDocument(document);
             writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
+           throw  new FtsException(e);
         }
     }
 
@@ -64,10 +68,8 @@ public class FtsIndex {
 
             return documents;
         } catch (IOException | ParseException e) {
-            e.printStackTrace();
+            throw new FtsException(e);
         }
-        return List.of();
-
     }
 
     public void deleteDocument(Term term) {
@@ -77,7 +79,7 @@ public class FtsIndex {
             writer.deleteDocuments(term);
             writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new FtsException(e);
         }
     }
 
@@ -93,9 +95,8 @@ public class FtsIndex {
 
             return documents;
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new FtsException(e);
         }
-        return null;
 
     }
 
@@ -111,10 +112,8 @@ public class FtsIndex {
 
             return documents;
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new FtsException(e);
         }
-        return null;
-
     }
 
 }

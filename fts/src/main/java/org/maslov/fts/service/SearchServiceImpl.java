@@ -5,10 +5,8 @@ import org.maslov.fts.model.Document;
 import org.maslov.fts.model.DocumentDto;
 import org.springframework.stereotype.Service;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class SearchServiceImpl implements SearchService{
@@ -35,7 +33,7 @@ public class SearchServiceImpl implements SearchService{
         document.setTitle(documentDto.getTitle());
         document.setAuthor(documentDto.getAuthor());
         document = documentDao.save(document);
-        currentIndex.indexDocument(document.getTitle(), document.getText(), document.getId());
+        currentIndex.indexDocument(document.getTitle(), document.getText(), document.getAuthor(), document.getId());
     }
 
     @Override

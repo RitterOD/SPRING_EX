@@ -1,0 +1,18 @@
+###
+POST http://localhost:8080/add
+Content-Type: application/json
+
+{
+  "author": "trololo",
+  "text": "text text text text text text text text",
+  "title": "title title title"
+}
+
+###
+POST http://localhost:8080/search
+Content-Type: application/json
+
+{
+  "pattern": "title",
+  "limit": 10
+}
